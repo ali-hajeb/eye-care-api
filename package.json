@@ -3,7 +3,7 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "$env:DEBUG='myapp:*'; npm start",
+        "start": "node index.js",
         "dev": "nodemon index.js"
     },
     "dependencies": {
