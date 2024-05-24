@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const validator = require('validator');
 const { hashSync, compareSync } = require('bcryptjs');
-const { passwordReg, engLetterOnlyReg, mobilePhoneRegex } = require('../../utils');
+const { passwordReg, engLetterOnlyReg, iranPhoneNumberRegex } = require('../../utils');
 const jwt = require('jsonwebtoken');
 
 const { JWT_SECRET } = process.env;
@@ -21,7 +21,7 @@ const userSchema = new Schema({
   },
   firstName_en: {
     type: String,
-    required: [true, 'Firstname is required!'],
+    // required: [true, 'Firstname is required!'],
     validate: {
       validator(fname) {
         return engLetterOnlyReg.test(fname);
@@ -33,7 +33,7 @@ const userSchema = new Schema({
   },
   lastName_en: {
     type: String,
-    required: [true, 'Lastname is required!'],
+    // required: [true, 'Lastname is required!'],
     validate: {
       validator(fname) {
         return engLetterOnlyReg.test(fname);
@@ -152,17 +152,15 @@ const userSchema = new Schema({
   },
   eyemh: {
     type: String,
-    required: true,
   },
   drugHistory: [{
     type: String,
-    required: true,
   }],
   tel: {
     required: [true, 'Telephone number is required!'],
     validate: {
       validator(tel) {
-        return mobilePhoneRegex.test(tel);
+        return iranPhoneNumberRegex.test(tel);
       },
       message: 'Telephone number is not valid!'
     },
