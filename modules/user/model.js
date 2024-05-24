@@ -95,7 +95,7 @@ const userSchema = new Schema({
   },
   carerRel: {
     type: String,
-    enum: ['فرزند', 'همسر', 'پدر', 'مادر', 'پرستار', 'سایر'],
+    enum: ['فرزند', 'همسر', 'پدر یا مادر', 'پرستار', 'سایر'],
     required: true
   },
   carerEducation: {
