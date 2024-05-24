@@ -133,7 +133,6 @@ const userSchema = new Schema({
   },
   allergy: {
     type: String,
-    required: true,
   },
   hasDiabetes: {
     type: Boolean,
