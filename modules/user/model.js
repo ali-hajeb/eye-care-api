@@ -45,22 +45,22 @@ const userSchema = new Schema({
   },
   fatherName: {
     type: String,
-    required: true,
+    required: false,
   },
   weight: {
     type: Number,
-    required: true,
+    required: false,
     default: 75
   },
   isMarried: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false,
   },
   education: {
     type: Number,
     // enum: ['بی‌سواد', 'سیکل', 'دیپلم', 'فوق دیپلم', 'لیسانس', 'فوق لیسانس', 'دکترا و بالاتر']
-    required: true,
+    required: false,
     validate: {
       validator(n) {
         return n < 8 && n > -1
@@ -70,38 +70,35 @@ const userSchema = new Schema({
   },
   job: {
     type: String,
-    required: true,
+    required: false,
   },
   immediateFamily: {
     type: String,
   },
   carerFname: {
     type: String,
-    required: [true, 'Firstname is required!'],
-    trim: true,
+    required: [false, 'Firstname is required!'],
     default: null,
   },
   carerLname: {
     type: String,
-    required: [true, 'Lastname is required!'],
-    trim: true,
+    required: [false, 'Lastname is required!'],
     default: null,
   },
   carerAge: {
     type: Number,
-    required: [true, 'Age is required!'],
-    trim: true,
+    required: [false, 'Age is required!'],
     default: null,
   },
   carerRel: {
     type: String,
     enum: ['فرزند', 'همسر', 'پدر یا مادر', 'پرستار', 'سایر'],
-    required: true
+    required: false
   },
   carerEducation: {
     type: Number,
     // enum: ['بی‌سواد', 'سیکل', 'دیپلم', 'فوق دیپلم', 'لیسانس', 'فوق لیسانس', 'دکترا و بالاتر']
-    required: true,
+    required: false,
     validate: {
       validator(n) {
         return n < 8 && n > -1
@@ -111,11 +108,11 @@ const userSchema = new Schema({
   },
   carerGender: {
     type: Boolean,
-    required: true,
+    required: false,
   },
   gender: {
     type: Boolean,
-    required: true,
+    required: false,
   },
   idCode: {
     type: String,
@@ -123,12 +120,12 @@ const userSchema = new Schema({
   },
   isSmoker: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false,
   },
   isAlcoholic: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false,
   },
   allergy: {
@@ -136,17 +133,17 @@ const userSchema = new Schema({
   },
   hasDiabetes: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false,
   },
   hasHTN: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false,
   },
   hasEyeKer: {
     type: Boolean,
-    required: true,
+    required: false,
     default: false,
   },
   eyemh: {
@@ -156,7 +153,7 @@ const userSchema = new Schema({
     type: String,
   }],
   tel: {
-    required: [true, 'Telephone number is required!'],
+    required: [false, 'Telephone number is required!'],
     validate: {
       validator(tel) {
         return iranPhoneNumberRegex.test(tel);
@@ -167,19 +164,17 @@ const userSchema = new Schema({
   },
   birth: {
     type: Date,
-    required: [true, 'Birth date is required!']
+    required: [false, 'Birth date is required!']
   },
   address: {
     type: String,
-    required: [true, 'Address is required!'],
-    trim: true,
+    required: [false, 'Address is required!'],
     default: null,
   },
   email: {
     type: String,
     unique: true,
     required: [true, 'Email is required!'],
-    trim: true,
     validate: {
       validator(email) {
         return validator.isEmail(email);
@@ -225,8 +220,6 @@ userSchema.methods = {
   toAuthJSON(token) {
     return {
       _id: this._id,
-      enrollmentApplications: this.enrollmentApplications,
-      orders: this.orders,
       token: `JWT ${token}`,
     };
   },
