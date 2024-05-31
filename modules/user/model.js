@@ -50,7 +50,6 @@ const userSchema = new Schema({
   weight: {
     type: Number,
     required: false,
-    default: 75
   },
   isMarried: {
     type: Boolean,
@@ -149,9 +148,9 @@ const userSchema = new Schema({
   eyemh: {
     type: String,
   },
-  drugHistory: [{
+  drugHistory: {
     type: String,
-  }],
+  },
   tel: {
     required: [false, 'Telephone number is required!'],
     validate: {
