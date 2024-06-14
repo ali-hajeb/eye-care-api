@@ -17,6 +17,20 @@ const medSchema = new Schema({
     enum: ['m', 'h'],
     required: true
   },
+  startFrom: {
+    type: Date,
+    required: true,
+  },
+  type: {
+    type: String,
+    enum: ['قرص', 'قطره', 'پماد', 'کپسول', 'شربت', 'تزریق', 'سایر'],
+    required: true,
+    default: 'سایر'
+  },
+  notificationId: {
+    type: String,
+    required: true
+  },
   usageHistory: [{
     date: Number,
     consumed: Boolean
