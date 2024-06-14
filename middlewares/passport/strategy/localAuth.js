@@ -3,14 +3,17 @@ const userSchema = require('../../../modules/user/model');
 const adminSchema = require('../../../modules/admin/model');
 
 const options = {
-  usernameField: 'email',
+  // usernameField: 'email',
+  usernameField: 'idCode',
 };
 
 const userStrategy = new LocalStrategy(
   options,
-  async (email, password, done) => {
+  // async (email, password, done) => {
+  async (idCode, password, done) => {
     try {
-      const user = await userSchema.findOne({ email: email.toLowerCase() });
+      // const user = await userSchema.findOne({ email: email.toLowerCase() });
+      const user = await userSchema.findOne({ idCode });
       if (!user) return done(null, false);
       else if (!user.authenticateUser(password)) return done(null, false);
       return done(null, user);

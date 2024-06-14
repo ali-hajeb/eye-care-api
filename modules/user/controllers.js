@@ -19,7 +19,7 @@ const jwt = require('jsonwebtoken');
 // });
 
 const login = async (req, res, next) => {
-  const expiresIn = req.body.rememberMe ? 7 * 24 * 3600 : 3600;
+  const expiresIn = req.body.rememberMe ? 300 * 24 * 3600 : 3600;
   const token = req.user.createToken(expiresIn);
 
   res.status(httpStatus.OK).json({ ...req.user.toAuthJSON(token), expiresIn });
@@ -125,7 +125,7 @@ const updateUser = async (req, res) => {
 const getUserData = async (req, res, next) => {
   res
     .status(httpStatus.OK)
-    .json(await req.user.toJSON());
+    .json(await req.user.populate('meds'));
   return next();
 };
 
