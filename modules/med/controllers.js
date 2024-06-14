@@ -7,13 +7,12 @@ const { ObjectId } = Types
 
 const addMed = async (req, res) => {
   try {
-    const { name, interval, intervalUnit, fa } = req.body
-    const newMed = await medSchema.create({ name, interval, intervalUnit, fa });
+    const newMed = await medSchema.create({ ...req.body });
     await userSchema.findByIdAndUpdate(req.user.id, { $addToSet: { meds: newMed._id } });
     return res.status(httpStatus.OK).json(newMed);
   } catch (error) {
     console.log('[AddMed] er: ', error);
-    if (newMed && newMed._id) await medSchema.findByIdAndDelete(newMed._id)
+    if (newMed) await medSchema.findByIdAndDelete(newMed._id)
     return res.status(httpStatus.BAD_REQUEST).json(error);
   }
 }
