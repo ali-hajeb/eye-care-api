@@ -12,7 +12,7 @@ const medSchema = new Schema({
     type: Number,
     required: true,
   },
-  intervalUnit: {
+  intervalType: {
     type: String,
     enum: ['m', 'h'],
     required: true
@@ -27,7 +27,7 @@ const medSchema = new Schema({
     required: true,
     default: 'سایر'
   },
-  notificationId: {
+  id: {
     type: String,
     required: true
   },
