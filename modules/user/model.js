@@ -115,6 +115,7 @@ const userSchema = new Schema({
   },
   idCode: {
     type: String,
+    unique: true,
     required: true,
   },
   isSmoker: {

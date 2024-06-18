@@ -29,12 +29,17 @@ const medSchema = new Schema({
   },
   id: {
     type: String,
+    unique: true,
     required: true
   },
   usageHistory: [{
     date: Number,
     consumed: Boolean
   }],
+  isActive: {
+    type: boolean,
+    default: true,
+  }
 });
 
 // medSchema.methods = {
