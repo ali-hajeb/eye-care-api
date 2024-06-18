@@ -32,6 +32,12 @@ const medSchema = new Schema({
     unique: true,
     required: true
   },
+  notificationId: [{
+    type: String,
+  }],
+  reminders: [{
+    type: String,
+  }],
   usageHistory: [{
     date: Number,
     consumed: Boolean
