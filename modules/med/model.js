@@ -37,7 +37,7 @@ const medSchema = new Schema({
     consumed: Boolean
   }],
   isActive: {
-    type: boolean,
+    type: Boolean,
     default: true,
   }
 });
