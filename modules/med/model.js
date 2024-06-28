@@ -42,6 +42,12 @@ const medSchema = new Schema({
     date: Number,
     consumed: Boolean
   }],
+  dose: {
+    type: String,
+  },
+  desc: {
+    type: String,
+  },
   isActive: {
     type: Boolean,
     default: true,

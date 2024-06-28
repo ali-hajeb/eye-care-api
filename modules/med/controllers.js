@@ -29,6 +29,17 @@ const deleteMed = async (req, res) => {
   }
 }
 
+const deleteMedOnSync = async (req, res) => {
+  try {
+    const { id } = req.params;
+    await medSchema.findOneAndDelete({id});
+    return res.status(httpStatus.OK).send();
+  } catch (error) {
+    console.log('[SyncDelMed] er: ', error);
+    return res.status(httpStatus.BAD_REQUEST).json(error);
+  }
+}
+
 const updateMed = async (req, res) => {
   try {
     const { id } = req.params;
@@ -43,5 +54,6 @@ const updateMed = async (req, res) => {
 module.exports = {
   addMed,
   deleteMed,
-  updateMed
+  deleteMedOnSync,
+  updateMed,
 }
