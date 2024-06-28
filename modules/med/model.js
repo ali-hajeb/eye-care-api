@@ -39,8 +39,7 @@ const medSchema = new Schema({
     type: String,
   }],
   usageHistory: [{
-    date: Number,
-    consumed: Boolean
+    date: String,
   }],
   dose: {
     type: String,
