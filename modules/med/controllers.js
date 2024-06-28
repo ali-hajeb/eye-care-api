@@ -51,9 +51,21 @@ const updateMed = async (req, res) => {
   }
 }
 
+const updateMedOnSync = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const updatedMed = await medSchema.findOneAndUpdate({id} , { ...req.body }, { new: true });
+    return res.status(httpStatus.OK).json(updatedMed)
+  } catch (error) {
+    console.log('[UpdatedMed] er: ', error);
+    return res.status(httpStatus.BAD_REQUEST).json(error);
+  }
+}
+
 module.exports = {
   addMed,
   deleteMed,
   deleteMedOnSync,
   updateMed,
+  updateMedOnSync
 }
