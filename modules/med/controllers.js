@@ -32,7 +32,8 @@ const deleteMed = async (req, res) => {
 const deleteMedOnSync = async (req, res) => {
   try {
     const { id } = req.params;
-    await medSchema.findOneAndDelete({id});
+    const med = await medSchema.findOneAndDelete({id}, {});
+    await userSchema.findByIdAndUpdate(req.user.id, { $pull: { meds: med._id } });
     return res.status(httpStatus.OK).send();
   } catch (error) {
     console.log('[SyncDelMed] er: ', error);
