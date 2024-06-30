@@ -41,7 +41,7 @@ const medSchema = new Schema({
   usageHistory: [{
     date: String,
   }],
-  dose: {
+  dosage: {
     type: String,
   },
   desc: {
