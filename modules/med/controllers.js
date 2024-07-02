@@ -12,7 +12,6 @@ const addMed = async (req, res) => {
     return res.status(httpStatus.OK).json(newMed);
   } catch (error) {
     console.log('[AddMed] er: ', error);
-    if (newMed) await medSchema.findByIdAndDelete(newMed._id)
     return res.status(httpStatus.BAD_REQUEST).json(error);
   }
 }
