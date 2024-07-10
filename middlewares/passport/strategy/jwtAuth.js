@@ -1,5 +1,6 @@
 const { Strategy, ExtractJwt } = require('passport-jwt');
 const userSchema = require('../../../modules/user/model');
+const doctorSchema = require('../../../modules/doctor/model');
 const adminSchema = require('../../../modules/admin/model');
 const { JWT_SECRET } = process.env;
 
@@ -18,6 +19,16 @@ const userStrategy = new Strategy(options, async (payload, done) => {
   }
 });
 
+const doctorStrategy = new Strategy(options, async (payload, done) => {
+  try {
+    const doctor = await doctorSchema.findById(payload._id);
+    if (!doctor) return done(null, false);
+    return done(null, doctor);
+  } catch (error) {
+    return done(error, false);
+  }
+});
+
 const adminStrategy = new Strategy(options, async (payload, done) => {
   try {
     const admin = await adminSchema.findById(payload._id);
@@ -30,5 +41,6 @@ const adminStrategy = new Strategy(options, async (payload, done) => {
 
 module.exports = {
   userStrategy,
+  doctorStrategy,
   adminStrategy,
 };

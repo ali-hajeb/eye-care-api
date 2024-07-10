@@ -202,7 +202,13 @@ const userSchema = new Schema({
   meds: [{
     type: Schema.Types.ObjectId,
     ref: 'Meds'
-  }]
+  }],
+  // nobat: [
+  //   {
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'Nobat'
+  //   }
+  // ]
 });
 
 userSchema.methods = {
