@@ -2,6 +2,8 @@ const { Schema, model } = require('mongoose');
 const { hashSync, compareSync } = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
+const { JWT_SECRET } = process.env;
+
 const doctorSchema = new Schema({
   idCode: {
     type: String,

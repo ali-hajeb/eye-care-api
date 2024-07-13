@@ -1,3 +1,4 @@
+const httpStatus = require('http-status');
 const doctorSchema = require('./model');
 
 const login = async (req, res, next) => {
