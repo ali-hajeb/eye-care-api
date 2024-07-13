@@ -46,7 +46,7 @@ doctorSchema.methods = {
   hashPassword(password) {
     return hashSync(password);
   },
-  authenticateUser(password) {
+  authenticateDoctor(password) {
     return compareSync(password, this.password);
   },
   createToken(expiresIn) {

@@ -33,7 +33,7 @@ const doctorStrategy = new LocalStrategy(
       // const doctor = await doctorSchema.findOne({ email: email.toLowerCase() });
       const doctor = await doctorSchema.findOne({ idCode });
       if (!doctor) return done(null, false);
-      else if (!doctor.authenticatedoctor(password)) return done(null, false);
+      else if (!doctor.authenticateDoctor(password)) return done(null, false);
       return done(null, doctor);
     } catch (error) {
       console.log(error);
