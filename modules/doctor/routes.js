@@ -6,7 +6,8 @@ const router = new Router();
 
 router.post('/login', localDoctorAuth, doctorControllers.login);
 router.post('/signup', doctorControllers.signUp);
-router.post('/update', jwtDoctorAuth, doctorControllers.updateDoc);
+
+router.patch('/', jwtDoctorAuth, doctorControllers.updateDoc);
 
 router.get('/me', jwtDoctorAuth, doctorControllers.getData);
 router.get('/:id', jwtUserAuth, doctorControllers.getDocData);

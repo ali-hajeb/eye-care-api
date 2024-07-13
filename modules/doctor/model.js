@@ -7,6 +7,10 @@ const doctorSchema = new Schema({
     type: String,
     required: true,
   },
+  password: {
+    type: String,
+    required: true,
+  },
   firstName: {
     type: String,
     required: true,
@@ -18,6 +22,14 @@ const doctorSchema = new Schema({
   nezam: {
     type: String,
     required: true,
+  },
+  field: {
+    type: String,
+    required: true,
+  },
+  major: {
+    type: String,
+    enum: ['عمومی', 'متخصص', 'فوق تخصص'],
   },
   patients: [{
     type: Schema.Types.ObjectId,
@@ -61,6 +73,7 @@ doctorSchema.methods = {
       firstName: this.firstName,
       lastName: this.lastName,
       nezam: this.nezam,
+      field: this.field,
       workDays: this.workDays,
     }
   }
