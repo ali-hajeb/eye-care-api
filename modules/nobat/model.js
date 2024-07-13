@@ -18,7 +18,7 @@ const nobatSchema = new Schema({
     enum: ['PENDING', 'ACCEPTED', 'REJECTED'],
     default: 'PENDING'
   }
-}, { timestamps });
+}, { timestamps: true });
 
 // medSchema.methods = {
 // };
