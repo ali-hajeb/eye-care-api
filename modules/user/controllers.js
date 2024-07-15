@@ -272,14 +272,14 @@ const changePasswordEmailVerification = async (req, res) => {
 const getUsers = async (req, res) => {
   try {
     const {
-      filter = '{}',
+      filter = {},
       limit = 0,
       skip = 0,
       sort = JSON.stringify({ createdAt: -1 }),
       populate = [],
     } = req.query;
 
-    const users = await userSchema.find(JSON.parse(filter), null, {
+    const users = await userSchema.find(filter, null, {
       limit,
       skip,
       sort: JSON.parse(sort),

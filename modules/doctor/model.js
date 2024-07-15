@@ -7,6 +7,7 @@ const { JWT_SECRET } = process.env;
 const doctorSchema = new Schema({
   idCode: {
     type: String,
+    unique: true,
     required: true,
   },
   password: {
@@ -20,6 +21,10 @@ const doctorSchema = new Schema({
   lastName: {
     type: String,
     required: true,
+  },
+  gender: {
+    type: Boolean,
+    required: false,
   },
   nezam: {
     type: String,
@@ -70,15 +75,38 @@ doctorSchema.methods = {
     });
     return verificationToken;
   },
+  toJSON() {
+    return {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      gender: this.gender,
+      idCode: this.idCode,
+      nezam: this.nezam,
+      major: this.major,
+      field: this.field,
+      patients: this.patients,
+      workDays: this.workDays,
+    }
+  },
   toPublicJSON() {
     return {
       firstName: this.firstName,
       lastName: this.lastName,
+      gender: this.gender,
       nezam: this.nezam,
+      major: this.major,
       field: this.field,
       workDays: this.workDays,
     }
   }
 };
+
+doctorSchema.pre('save', function (next) {
+  if (this.isModified('password')) {
+    this.password = this.hashPassword(this.password);
+  }
+  return next();
+});
+
 
 module.exports = model('Doctors', doctorSchema, 'Doctors');

@@ -47,7 +47,7 @@ const updateDoc = async (req, res) => {
 const getData = async (req, res, next) => {
   res
     .status(httpStatus.OK)
-    .json(await req.user.populate('Users'));
+    .json(await req.user.toJSON());
   return next();
 };
 
