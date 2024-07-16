@@ -26,6 +26,10 @@ const doctorSchema = new Schema({
     type: Boolean,
     required: false,
   },
+  maxPatients: {
+    type: Number,
+    default: 20
+  },
   nezam: {
     type: String,
     required: true,
