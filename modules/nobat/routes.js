@@ -10,4 +10,6 @@ router.delete('/:id', jwtUserAuth, nobatControllers.deleteNobat)
 router.patch('/:id', jwtUserAuth, nobatControllers.updateNobat)
 router.patch('/doc/:id', jwtDoctorAuth, nobatControllers.updateNobat)
 
+router.get('/', jwtUserAuth, nobatControllers.getDay);
+
 module.exports = router;

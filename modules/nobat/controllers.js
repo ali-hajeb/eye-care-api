@@ -1,6 +1,53 @@
 const httpStatus = require("http-status")
 const userSchema = require('../user/model');
+const doctorSchema = require('../doctor/model');
 const nobatSchema = require('./model');
+
+
+const getDay = async (req, res) => {
+  try {
+    const { date } = req.query;
+    const allDoctors = await doctorSchema.find();
+    const schedule = [];
+    const d = new Date(date);
+    const day = { date: d.toISOString(), docs: [] }
+    if (allDoctors) {
+      // for (let i = 0; i < 31; i++) {
+      // d.setDate(d.getDate() + i);
+      // d.setHours(0);
+      // d.setMinutes(0);
+      // d.setSeconds(0);
+
+      const todayNobats = await nobatSchema.find({ filter: { date: d.toISOString().split('T')[0] } })
+
+      for (const doc of allDoctors) {
+        let nobats = 0;
+        const _doc = {
+          id: doc._id,
+          name: `${doc.firstName} ${doc.lastName}`,
+          field: doc.field,
+          major: doc.major
+        }
+
+        if (todayNobats) nobats = todayNobats.filter(n => n.doctor === doc._id);
+        if (nobats >= doc.maxPatients) {
+          day.docs.push({ ..._doc, full: true })
+        } else {
+          const weekDay = d.getDay();
+          if (doc.workDays.includes(weekDay)) {
+            day.docs.push({ ..._doc, full: false })
+          }
+        }
+      }
+      schedule.push(day);
+    }
+    // }
+    return res.status(httpStatus.OK).json(day);
+  } catch (error) {
+    console.log('[GetDay] er: ', error);
+    return res.status(httpStatus.BAD_REQUEST).json(error);
+  }
+}
 
 
 const createNobat = async (req, res) => {
@@ -59,5 +106,6 @@ module.exports = {
   createNobat,
   updateNobat,
   deleteNobat,
-  getAllForDoc
+  getAllForDoc,
+  getDay
 }
