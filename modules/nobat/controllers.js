@@ -87,9 +87,9 @@ const deleteNobat = async (req, res) => {
 
 const getAllForDoc = async (req, res) => {
   try {
-    const { filter = '{}', limit = 0, skip = 0, populate = [] } = req.query;
+    const { filter = {}, limit = 0, skip = 0, populate = [] } = req.query;
     const list = await nobatSchema
-      .find(JSON.parse(filter), null, {
+      .find(filter, null, {
         limit,
         skip,
         sort: { createdAt: -1 },
