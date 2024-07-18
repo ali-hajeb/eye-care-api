@@ -9,7 +9,7 @@ const nobatSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Doctors'
   },
-  Date: {
+  date: {
     type: String,
     required: true,
   },
