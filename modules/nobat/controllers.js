@@ -18,7 +18,9 @@ const getDay = async (req, res) => {
       // d.setMinutes(0);
       // d.setSeconds(0);
 
-      const todayNobats = await nobatSchema.find({ filter: { date: d.toISOString() } })
+      console.log(day.date)
+      const allNobats = await nobatSchema.find({})
+      const todayNobats = allNobats.filter(n => n.date === d.toISOString());
 
       for (const doc of allDoctors) {
         let nobats = 0;
@@ -29,8 +31,9 @@ const getDay = async (req, res) => {
           major: doc.major
         }
 
-        if (todayNobats) nobats = todayNobats.filter(n => n.doctor === doc._id);
-        console.log('[getDay]: ', todayNobats, nobats)
+        
+        if (todayNobats) nobats = todayNobats.filter(n => n.doctor.equals(doc._id));
+        console.log('[getDay]', todayNobats, nobats)
         if (nobats.length >= doc.maxPatients) {
           day.docs.push({ ..._doc, full: true })
         } else {
