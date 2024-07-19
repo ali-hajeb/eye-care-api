@@ -18,7 +18,7 @@ const getDay = async (req, res) => {
       // d.setMinutes(0);
       // d.setSeconds(0);
 
-      const todayNobats = await nobatSchema.find({ filter: { date: d.toISOString().split('T')[0] } })
+      const todayNobats = await nobatSchema.find({ filter: { date: d.toISOString() } })
 
       for (const doc of allDoctors) {
         let nobats = 0;
