@@ -11,6 +11,7 @@ router.patch('/:id', jwtUserAuth, nobatControllers.updateNobat)
 router.patch('/doc/:id', jwtDoctorAuth, nobatControllers.updateNobat)
 
 router.get('/', jwtUserAuth, nobatControllers.getDay);
+router.get('/', jwtUserAuth, nobatControllers.getAllUserNobat);
 router.get('/doc/all', jwtDoctorAuth, nobatControllers.getAllForDoc);
 
 

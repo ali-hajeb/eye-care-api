@@ -31,7 +31,7 @@ const getDay = async (req, res) => {
           major: doc.major
         }
 
-        
+
         if (todayNobats) nobats = todayNobats.filter(n => n.doctor.equals(doc._id));
         console.log('[getDay]', todayNobats, nobats)
         if (nobats.length >= doc.maxPatients) {
@@ -53,6 +53,22 @@ const getDay = async (req, res) => {
   }
 }
 
+const getAllUserNobat = async (req, res) => {
+  try {
+    const { filter = { }, limit = 0, skip = 0, populate = [] } = req.query;
+    const list = await nobatSchema
+      .find({ ...filter, _id: req.user._id }, null, {
+        limit,
+        skip,
+        sort: { createdAt: -1 },
+      })
+      .populate(populate);
+    res.status(httpStatus.OK).json(list);
+  } catch (error) {
+    console.error('[Nobat:gta] er: ', error);
+    res.status(httpStatus.BAD_REQUEST).json(error)
+  }
+}
 
 const createNobat = async (req, res) => {
   try {
@@ -111,5 +127,6 @@ module.exports = {
   updateNobat,
   deleteNobat,
   getAllForDoc,
+  getAllUserNobat,
   getDay
 }
