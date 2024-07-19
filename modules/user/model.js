@@ -275,6 +275,7 @@ userSchema.methods = {
       email: this.email,
       isActive: this.isActive,
       meds: this.meds,
+      nobat: this.nobat
     };
   },
 };

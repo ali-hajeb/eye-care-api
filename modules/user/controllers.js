@@ -125,7 +125,7 @@ const updateUser = async (req, res) => {
 const getUserData = async (req, res, next) => {
   res
     .status(httpStatus.OK)
-    .json(await req.user.populate('meds'));
+    .json(await req.user.populate('meds', 'nobat'));
   return next();
 };
 
