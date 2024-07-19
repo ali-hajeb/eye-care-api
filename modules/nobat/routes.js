@@ -11,7 +11,7 @@ router.patch('/:id', jwtUserAuth, nobatControllers.updateNobat)
 router.patch('/doc/:id', jwtDoctorAuth, nobatControllers.updateNobat)
 
 router.get('/', jwtUserAuth, nobatControllers.getDay);
-router.get('/doc/all', jwtUserAuth, nobatControllers.getAllForDoc);
+router.get('/doc/all', jwtDoctorAuth, nobatControllers.getAllForDoc);
 
 
 module.exports = router;

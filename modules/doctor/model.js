@@ -88,6 +88,7 @@ doctorSchema.methods = {
       nezam: this.nezam,
       major: this.major,
       field: this.field,
+      maxPatients: this.maxPatients,
       patients: this.patients,
       workDays: this.workDays,
     }
@@ -100,6 +101,7 @@ doctorSchema.methods = {
       nezam: this.nezam,
       major: this.major,
       field: this.field,
+      maxPatients: this.maxPatients,
       workDays: this.workDays,
     }
   }

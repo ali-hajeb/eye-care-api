@@ -30,7 +30,8 @@ const getDay = async (req, res) => {
         }
 
         if (todayNobats) nobats = todayNobats.filter(n => n.doctor === doc._id);
-        if (nobats >= doc.maxPatients) {
+        console.log('[getDay]: ', todayNobats, nobats)
+        if (nobats.length >= doc.maxPatients) {
           day.docs.push({ ..._doc, full: true })
         } else {
           const weekDay = d.getDay();
