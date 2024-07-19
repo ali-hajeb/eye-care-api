@@ -56,8 +56,9 @@ const getDay = async (req, res) => {
 const getAllUserNobat = async (req, res) => {
   try {
     const { filter = { }, limit = 0, skip = 0, populate = [] } = req.query;
+    console.log(req.query, req.user._id.toString())
     const list = await nobatSchema
-      .find({ ...filter, _id: req.user._id }, null, {
+      .find({ ...filter, patient: req.user._id }, null, {
         limit,
         skip,
         sort: { createdAt: -1 },
