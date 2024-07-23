@@ -98,7 +98,7 @@ const updateNobat = async (req, res) => {
 const deleteNobat = async (req, res) => {
   try {
     const { id } = req.params;
-    const nobat = await nobatSchema.findOneAndDelete({ id }, {});
+    const nobat = await nobatSchema.findByIdAndDelete(id);
     await userSchema.findByIdAndUpdate(req.user.id, { $pull: { nobat: nobat._id } });
     return res.status(httpStatus.OK).send();
   } catch (error) {
