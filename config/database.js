@@ -9,7 +9,7 @@ module.exports.isConnected = () => {
 module.exports.connect = async () => {
     if (!this.isConnected()) {
         mongoose
-            .connect(MONGO_URI, {dbName: 'eye-care'})
+            .connect(MONGO_URI)
             .then(() => console.log('Successfully connected to database!'))
             .catch((error) => {
                 console.log('Database Connection failed. exiting now ...');

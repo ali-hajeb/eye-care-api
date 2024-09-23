@@ -1,3 +1,4 @@
+
 const medSchema = require('./model');
 const userSchema = require('../user/model');
 const httpStatus = require('http-status');
@@ -31,7 +32,7 @@ const deleteMed = async (req, res) => {
 const deleteMedOnSync = async (req, res) => {
   try {
     const { id } = req.params;
-    const med = await medSchema.findOneAndDelete({id}, {});
+    const med = await medSchema.findOneAndDelete({ id }, {});
     await userSchema.findByIdAndUpdate(req.user.id, { $pull: { meds: med._id } });
     return res.status(httpStatus.OK).send();
   } catch (error) {
@@ -43,7 +44,7 @@ const deleteMedOnSync = async (req, res) => {
 const updateMed = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedMed = await medSchema.findByIdAndUpdate(id , { ...req.body }, { new: true });
+    const updatedMed = await medSchema.findByIdAndUpdate(id, { ...req.body }, { new: true });
     return res.status(httpStatus.OK).json(updatedMed)
   } catch (error) {
     console.log('[UpdatedMed] er: ', error);
@@ -54,7 +55,7 @@ const updateMed = async (req, res) => {
 const updateMedOnSync = async (req, res) => {
   try {
     const { id } = req.params;
-    const updatedMed = await medSchema.findOneAndUpdate({id} , { ...req.body }, { new: true });
+    const updatedMed = await medSchema.findOneAndUpdate({ id }, { ...req.body }, { new: true });
     return res.status(httpStatus.OK).json(updatedMed)
   } catch (error) {
     console.log('[UpdatedMed] er: ', error);
