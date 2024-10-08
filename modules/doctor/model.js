@@ -96,6 +96,7 @@ doctorSchema.methods = {
       maxPatients: this.maxPatients,
       patients: this.patients,
       workDays: this.workDays,
+      role: this.role
     }
   },
   toPublicJSON() {
