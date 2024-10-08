@@ -49,6 +49,11 @@ const doctorSchema = new Schema({
   workDays: [
     { type: Number }
   ],
+  role: {
+    type: String,
+    enum: ['admin', 'u1'],
+    default: 'u1'
+  }
 });
 
 doctorSchema.methods = {

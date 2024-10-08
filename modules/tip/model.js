@@ -8,6 +8,10 @@ const tipSchema = new Schema({
   body: {
     type: String
   },
+  author: {
+    type: Schema.ObjectId,
+    ref: 'Doctors'
+  },
   image: {
     type: String,
   },

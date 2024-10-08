@@ -6,7 +6,7 @@ const { ObjectId } = Types
 
 const addTip = async (req, res) => {
   try {
-    const newTip = await tipSchema.create({ ...req.body });
+    const newTip = await tipSchema.create({ ...req.body, author: req.user._id });
     return res.status(httpStatus.OK).json(newTip);
   } catch (error) {
     console.log('[AddTip] er: ', error);
@@ -60,7 +60,9 @@ const getTips = async (req, res) => {
       populate = [],
     } = req.query;
 
-    const tips = await tipSchema.find(filter, null, {
+    const finalFilter = (req.user.role !== 'admin') ? { ...filter, author: req.user._id } : { ...filter }
+
+    const tips = await tipSchema.find(finalFilter, null, {
       limit,
       skip,
       sort: JSON.parse(sort),
