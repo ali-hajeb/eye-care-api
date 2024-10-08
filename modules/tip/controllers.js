@@ -60,6 +60,31 @@ const getTips = async (req, res) => {
       populate = [],
     } = req.query;
 
+    const tips = await tipSchema.find(filter, null, {
+      limit,
+      skip,
+      sort: JSON.parse(sort),
+    }).populate(populate);
+
+    res.status(httpStatus.OK).json(tips);
+  } catch (error) {
+    console.log(error);
+    res.status(httpStatus.BAD_REQUEST).json(error);
+  }
+}
+
+const getTipsDoc = async (req, res) => {
+  try {
+    const {
+      filter = {},
+      limit = 0,
+      skip = 0,
+      sort = JSON.stringify({ createdAt: -1 }),
+      populate = [],
+    } = req.query;
+
+    console.log(req.user, req.user._id, req.user.role)
+
     const finalFilter = (req.user.role !== 'admin') ? { ...filter, author: req.user._id } : { ...filter }
 
     const tips = await tipSchema.find(finalFilter, null, {
@@ -80,5 +105,6 @@ module.exports = {
   deleteTip,
   updateTip,
   getTips,
+  getTipsDoc,
   getTipById
 }
