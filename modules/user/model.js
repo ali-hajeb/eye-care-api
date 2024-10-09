@@ -50,6 +50,7 @@ const userSchema = new Schema({
   weight: {
     type: Number,
     required: false,
+    default: 0,
   },
   isMarried: {
     type: Boolean,
@@ -65,14 +66,17 @@ const userSchema = new Schema({
         return n < 8 && n > -1
       },
       message: 'Education state must be between 0 - 7'
-    }
+    },
+    default: null,
   },
   job: {
     type: String,
+    default: '',
     required: false,
   },
   immediateFamily: {
     type: String,
+    default: '',
   },
   carerFname: {
     type: String,
@@ -92,7 +96,8 @@ const userSchema = new Schema({
   carerRel: {
     type: String,
     enum: ['فرزند', 'همسر', 'پدر یا مادر', 'پرستار', 'سایر'],
-    required: false
+    required: false,
+    default: null
   },
   carerEducation: {
     type: Number,
@@ -103,15 +108,17 @@ const userSchema = new Schema({
         return n < 8 && n > -1
       },
       message: 'Education state must be between 0 - 7'
-    }
+    },
+    default: null
+
   },
   carerGender: {
     type: Boolean,
-    required: false,
+    default: false
   },
   gender: {
     type: Boolean,
-    required: false,
+    default: false,
   },
   idCode: {
     type: String,
@@ -130,6 +137,7 @@ const userSchema = new Schema({
   },
   allergy: {
     type: String,
+    default: '',
   },
   hasDiabetes: {
     type: Boolean,
@@ -148,9 +156,11 @@ const userSchema = new Schema({
   },
   eyemh: {
     type: String,
+    default: '',
   },
   drugHistory: {
     type: String,
+    default: '',
   },
   tel: {
     required: [false, 'Telephone number is required!'],
@@ -161,10 +171,12 @@ const userSchema = new Schema({
       message: 'Telephone number is not valid!'
     },
     type: String,
+    default: '',
   },
   birth: {
     type: Date,
-    required: [false, 'Birth date is required!']
+    required: [false, 'Birth date is required!'],
+    default: null
   },
   address: {
     type: String,
@@ -247,10 +259,27 @@ userSchema.methods = {
       firstName_en: this.firstName_en,
       lastName_en: this.lastName_en,
       fatherName: this.fatherName,
+      gender: this.gender,
       weight: this.weight,
+      age: this.age,
+      birth: this.birth,
+      idCode: this.idCode,
       isMarried: this.isMarried,
       education: this.education,
       job: this.job,
+      tel: this.tel,
+      address: this.address,
+      email: this.email,
+      meds: this.meds,
+      isSmoker: this.isSmoker,
+      isAlcoholic: this.isAlcoholic,
+      hasDiabetes: this.hasDiabetes,
+      hasHTN: this.hasHTN,
+      hasEyeKer: this.hasEyeKer,
+      allergy: this.allergy,
+      eyemh: this.eyemh,
+      drugHistory: this.drugHistory,
+      nobat: this.nobat,
       immediateFamily: this.immediateFamily,
       carerFname: this.carerFname,
       carerLname: this.carerLname,
@@ -258,24 +287,7 @@ userSchema.methods = {
       carerRel: this.carerRel,
       carerEducation: this.carerEducation,
       carerGender: this.carerGender,
-      gender: this.gender,
-      idCode: this.idCode,
-      isSmoker: this.isSmoker,
-      isAlcoholic: this.isAlcoholic,
-      allergy: this.allergy,
-      hasDiabetes: this.hasDiabetes,
-      hasHTN: this.hasHTN,
-      hasEyeKer: this.hasEyeKer,
-      eyemh: this.eyemh,
-      drugHistory: this.drugHistory,
-      tel: this.tel,
-      birth: this.birth,
-      address: this.address,
-      age: this.age,
-      email: this.email,
       isActive: this.isActive,
-      meds: this.meds,
-      nobat: this.nobat
     };
   },
 };
