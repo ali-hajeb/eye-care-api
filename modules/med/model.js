@@ -47,6 +47,10 @@ const medSchema = new Schema({
   desc: {
     type: String,
   },
+  count: {
+    type: Number,
+    default: 0
+  },
   isActive: {
     type: Boolean,
     default: true,
