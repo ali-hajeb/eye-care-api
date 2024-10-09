@@ -4,7 +4,7 @@ const { jwtDoctorAuth } = require('../../middlewares/passport');
 
 const router = new Router();
 
-router.post('/', tipControllers.addTip);
+router.post('/', jwtDoctorAuth, tipControllers.addTip);
 router.delete('/:id', jwtDoctorAuth, tipControllers.deleteTip)
 router.patch('/:id', jwtDoctorAuth, tipControllers.updateTip)
 router.get('/doc', jwtDoctorAuth, tipControllers.getTipsDoc)
