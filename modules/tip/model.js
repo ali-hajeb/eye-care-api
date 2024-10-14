@@ -15,6 +15,10 @@ const tipSchema = new Schema({
   image: {
     type: String,
   },
+  category: {
+    type: String,
+    default: 'آموزش'
+  }
 }, { timestamps: true });
 
 
