@@ -163,6 +163,7 @@ const userSchema = new Schema({
     default: '',
   },
   tel: {
+    required: false,
     validate: {
       validator(tel) {
         return iranPhoneNumberRegex.test(tel);
@@ -170,7 +171,7 @@ const userSchema = new Schema({
       message: 'Telephone number is not valid!'
     },
     type: String,
-    default: '',
+    default: '09000000000',
   },
   birth: {
     type: Date,
