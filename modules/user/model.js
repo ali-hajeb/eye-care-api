@@ -163,7 +163,6 @@ const userSchema = new Schema({
     default: '',
   },
   tel: {
-    required: [false, 'Telephone number is required!'],
     validate: {
       validator(tel) {
         return iranPhoneNumberRegex.test(tel);
