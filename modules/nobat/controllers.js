@@ -55,8 +55,8 @@ const getDay = async (req, res) => {
 
 const getAllUserNobat = async (req, res) => {
   try {
-    const { filter = { }, limit = 0, skip = 0, populate = [] } = req.query;
-  
+    const { filter = {}, limit = 0, skip = 0, populate = [] } = req.query;
+
     console.log(req.query, req.user._id.toString())
     const list = await nobatSchema
       .find({ ...filter, patient: req.user._id }, null, {
@@ -74,6 +74,13 @@ const getAllUserNobat = async (req, res) => {
 
 const createNobat = async (req, res) => {
   try {
+    const today = new Date();
+    today.setUTCHours(0, 0, 0, 0);
+    const user = await req.user.populate('nobat')
+    console.log('[today]: ', today, user.nobat)
+    if (user.nobat.findIndex(n => n.date === today.toISOString()) > -1) {
+      return res.status(400).json({message: 'EXISTS'});
+    }
     const nobat = await nobatSchema.create({ ...req.body });
     await userSchema.findByIdAndUpdate(req.user.id, { $addToSet: { nobat: nobat._id } });
     return res.status(httpStatus.OK).json(nobat);
