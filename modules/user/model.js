@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
 const validator = require('validator');
 const { hashSync, compareSync } = require('bcryptjs');
-const { passwordReg, engLetterOnlyReg, iranPhoneNumberRegex } = require('../../utils');
+const { passwordReg, iranPhoneNumberRegex } = require('../../utils');
 const jwt = require('jsonwebtoken');
 
 const { JWT_SECRET } = process.env;
@@ -16,30 +16,6 @@ const userSchema = new Schema({
   lastName: {
     type: String,
     required: [true, 'Lastname is required!'],
-    trim: true,
-    default: null,
-  },
-  firstName_en: {
-    type: String,
-    // required: [true, 'Firstname is required!'],
-    validate: {
-      validator(fname) {
-        return engLetterOnlyReg.test(fname);
-      },
-      message: 'English letters only!',
-    },
-    trim: true,
-    default: null,
-  },
-  lastName_en: {
-    type: String,
-    // required: [true, 'Lastname is required!'],
-    validate: {
-      validator(fname) {
-        return engLetterOnlyReg.test(fname);
-      },
-      message: 'English letters only!',
-    },
     trim: true,
     default: null,
   },
@@ -59,7 +35,6 @@ const userSchema = new Schema({
   },
   education: {
     type: Number,
-    // enum: ['بی‌سواد', 'سیکل', 'دیپلم', 'فوق دیپلم', 'لیسانس', 'فوق لیسانس', 'دکترا و بالاتر']
     required: false,
     validate: {
       validator(n) {
@@ -101,7 +76,6 @@ const userSchema = new Schema({
   },
   carerEducation: {
     type: Number,
-    // enum: ['بی‌سواد', 'سیکل', 'دیپلم', 'فوق دیپلم', 'لیسانس', 'فوق لیسانس', 'دکترا و بالاتر']
     required: false,
     validate: {
       validator(n) {
@@ -247,7 +221,7 @@ userSchema.methods = {
   },
   generateVerificationToken() {
     const verificationToken = jwt.sign({ _id: this._id }, JWT_SECRET, {
-      expiresIn: '1m',
+      expiresIn: '720h',
     });
     return verificationToken;
   },

@@ -7,6 +7,7 @@ const { ObjectId } = Types
 const addTip = async (req, res) => {
   try {
     const newTip = await tipSchema.create({ ...req.body, author: req.user._id });
+    console.log("----------", req.body);
     return res.status(httpStatus.OK).json(newTip);
   } catch (error) {
     console.log('[AddTip] er: ', error);

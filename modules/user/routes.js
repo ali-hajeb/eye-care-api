@@ -8,6 +8,7 @@ router.post('/login', localUserAuth, userControllers.login);
 router.post('/confirm', userControllers.confirmEmail);
 router.post('/password/verification', userControllers.changePasswordEmailVerification);
 router.post('/password', userControllers.changePassword);
+router.post('/newLink', jwtUserAuth, userControllers.getNewVerificationLink);
 
 router.post('/signup', userControllers.signUp);
 router.post('/update', jwtUserAuth, userControllers.updateUser);

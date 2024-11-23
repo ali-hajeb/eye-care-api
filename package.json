@@ -19,6 +19,7 @@
         "http-status": "^1.7.4",
         "jsonwebtoken": "^9.0.2",
         "mongoose": "^8.3.5",
+        "nodemailer": "^6.9.16",
         "passport": "^0.7.0",
         "passport-jwt": "^4.0.1",
         "passport-local": "^1.0.0",

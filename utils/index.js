@@ -1,6 +1,6 @@
 const isDev = process.env.NODE_ENV === 'development';
 const emailConfrimationUrl = `https://${process.env.CLIENT_DOMAIN}/verify?token=`;
-const passwordChangeEmailUrl = `https://${process.env.CLIENT_DOMAIN}/change_password?token=`;
+const passwordChangeEmailUrl = `https://${process.env.CLIENT_DOMAIN}/changePass?token=`;
 const defaultCourseThumbnail = 'https://api.cogno.team/public/thumbnails/no-image.jpg';
 const defaultUserThumbnail = 'https://cogno.team/profile.svg';
 const isProd = process.env.NODE_ENV === 'production';

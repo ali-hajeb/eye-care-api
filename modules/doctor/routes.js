@@ -6,6 +6,10 @@ const router = new Router();
 
 router.post('/login', localDoctorAuth, doctorControllers.login);
 router.post('/signup', doctorControllers.signUp);
+router.post('/confirm', doctorControllers.confirmEmail);
+router.post('/password/verification', doctorControllers.changePasswordEmailVerification);
+router.post('/password', doctorControllers.changePassword);
+router.post('/newlink', jwtDoctorAuth, doctorControllers.getNewVerificationLink);
 
 router.patch('/', jwtDoctorAuth, doctorControllers.updateDoc);
 

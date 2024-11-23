@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const validator = require('validator');
 const { hashSync, compareSync } = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
@@ -33,6 +34,7 @@ const doctorSchema = new Schema({
   nezam: {
     type: String,
     required: true,
+    unique: true,
   },
   field: {
     type: String,
@@ -53,7 +55,22 @@ const doctorSchema = new Schema({
     type: String,
     enum: ['admin', 'u1'],
     default: 'u1'
-  }
+  },
+  email: {
+    type: String,
+    unique: true,
+    required: [true, 'Email is required!'],
+    validate: {
+      validator(email) {
+        return validator.isEmail(email);
+      },
+      message: '{VALUE} is not a valid email!',
+    },
+  },
+  isActive: {
+    type: Boolean,
+    default: false
+  },
 });
 
 doctorSchema.methods = {
@@ -79,8 +96,9 @@ doctorSchema.methods = {
     };
   },
   generateVerificationToken() {
+    console.log('[token]: ', JWT_SECRET);
     const verificationToken = jwt.sign({ _id: this._id }, JWT_SECRET, {
-      expiresIn: '1m',
+      expiresIn: '720h',
     });
     return verificationToken;
   },
@@ -96,7 +114,9 @@ doctorSchema.methods = {
       maxPatients: this.maxPatients,
       patients: this.patients,
       workDays: this.workDays,
-      role: this.role
+      role: this.role,
+      email: this.email,
+      isActive: this.isActive,
     }
   },
   toPublicJSON() {
